@@ -5,13 +5,21 @@
 #include <memory.h>
 #include <math.h>
 
+#define MAX_SORTING 4
+#define MIN_SORTING 1
+
 void showAllDestinations(List *l) {
 	int option, i = 0;
 	do {
 		printSortMenu();
 
 		option = askUserForOption();
-	} while (option < 1 || option > MAX_SORTING);
+
+		if(!isCorrect(option)){
+			printOptionError();
+		}
+
+	} while (option < MIN_SORTING || option > MAX_SORTING);
 
 	option -= 1;
 
