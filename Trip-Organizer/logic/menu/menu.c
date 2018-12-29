@@ -5,6 +5,9 @@
 
 #define FIRST_OPTION 1
 #define LAST_OPTION 4
+#define BY_TIME 3
+#define BY_DISTANCE 2
+#define BY_AVG_PRICE 1
 
 void printWelcomeLine() {
 	printf("\n\t---===  Welcome to TripOrganizer  ===---\n");
