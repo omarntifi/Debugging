@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <memory.h>
 
+#define BY_NAME 0
+#define BY_AVG_PRICE 1
+#define BY_DISTANCE 2
+#define BY_TIME 3
 
 List create() {
 	List l;
@@ -43,19 +47,21 @@ void insert(List * l, Destination d) {
 	for (i = 0; i < MAX_SORTING; i++) {
 		//En primer lloc, situem el pdi al primer fantasma
 		l->poi[i] = l->first;
-
+			
 		do {
 			//Avancem al següent element i mirem si aquest encara l'hem de saltar
 			l->poi[i] = l->poi[i]->next[i];
 
-			if (l->poi[i] = l->last) {
+			if (l->poi[i] == l->last) {
+				printf("ENTRA BREAK\n");
 				break;
 			}
 
 			//Les condicions per saltar un element depenen del mode d'ordenació
 			switch (i) {
-				case BY_NAME:
+				case 0:
 					condicio = strcmp(d.name, l->poi[i]->dest.name) > 0;
+					printf("condicio = %d\n", condicio);
 					break;
 				case BY_AVG_PRICE:
 					condicio = getAverageHotelPrice(d) > getAverageHotelPrice(l->poi[i]->dest);
@@ -64,13 +70,15 @@ void insert(List * l, Destination d) {
 					condicio = getDistanceFromBcn(d) > getDistanceFromBcn(l->poi[i]->dest);
 					break;
 				case BY_TIME:
-					condicio = getTimeFromBcn(d) > getTimeFromBcn(l->poi[i]->dest);
+				//	condicio = getTimeFromBcn(d) > getTimeFromBcn(l->poi[i]->dest);
 					break;
 				default:
 					//Si per un casual algú decideix afegir més camps, ens protegim ordenant segons entrada
 					condicio = 0;
+					printf("KO");
 					break;
 			}
+		
 			//Seguim saltant mentre no arribem al darrer element i es segueixi complint la condició de salt
 		} while (condicio);
 

@@ -9,28 +9,6 @@
 #define MIN_SORTING 1
 
 
-void showDestinationsByName(List *l, int option){
-      int i = 0, j = 0, ok = 0;
-      List sorted = create();
-      goStart(l, 0);
-//      goStart(&sorted, 0);
-      insert(&sorted, readPoi(*l, 0), -1);
- 
-      while(!isEnd(*l, 0)){
-		printDestination(readPoi(sorted, 0), 69, 0);
-          goNext(l, 0);
-          insert(&sorted, readPoi(*l, 0), 1);
-      }
- 
- 
-      goStart(&sorted, 0);
-	  goNext(&sorted, 0);
- 
-      while(!isEnd(sorted, 0)){
-          printDestination(readPoi(sorted, 0), ++i, 0);
-          goNext(&sorted, 0);
-      }
-  }
 
 void showAllDestinations(List *l) {
 	int option, i = 0;
@@ -45,30 +23,17 @@ void showAllDestinations(List *l) {
 
 	} while (option < MIN_SORTING || option > MAX_SORTING);
 
-//	option -= 1;
+	option -= 1;
 	
-	switch(option){
-		case 1:
-					showDestinationsByName(l, option - 1);
-		break;
-
-		case 2:
-		break;
-
-		case 3:
-		break;
-
-		case 4:
-		break;
-	}
-	/*
+	
 	goStart(l, option);
 
 	while (!isEnd(*l, option)) {
 		printDestination(readPoi(*l, option), ++i, option);
 		goNext(l, option);
+
 	}
-	*/
+	
 }
 
 
@@ -112,7 +77,6 @@ void planTrip(List *l){
 
         	printAverage(getAverageHotelPrice(d));
 			
-			printTop3(d.hotelPrices);
         	qsort(d.hotelPrices, d.nHotels, sizeof(double), comparePrices);
 
             printTop3(d.hotelPrices);
@@ -121,7 +85,7 @@ void planTrip(List *l){
         case 2:
         	map = mapAltitudeTravel(d);
             printAltitudeMap(map, d.n + 2);
-
+			
             for (i = 0; i < d.n; i++) {
             	free(map[i]);
             }
@@ -139,7 +103,7 @@ void readWholeFile(FILE * f, List * l) {
 
 	for (i = 0; i < nDestinations; i++) {
 		Destination d = readFromFile(f);
-		insert(l, d, -1);
+		insert(l, d);
 	}
 }
 
