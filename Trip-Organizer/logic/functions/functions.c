@@ -22,7 +22,21 @@ void showAllDestinations(List *l) {
 	} while (option < MIN_SORTING || option > MAX_SORTING);
 
 	option -= 1;
+	/*
+	switch(option){
+		case 1:
+			//showDestinationsByName(l, option - 1);
+		break;
 
+		case 2:
+		break;
+
+		case 3:
+		break;
+
+		case 4:
+		break;
+	}*/
 	goStart(l, option);
 
 	while (!isEnd(*l, option)) {
@@ -30,6 +44,33 @@ void showAllDestinations(List *l) {
 		goNext(l, option);
 	}
 }
+/*
+void showDestinationsByName(List *l, int option){
+	int i = 0, j = 0, ok = 0;
+	char * name;
+
+	name = (char *)malloc(sizeof(char));
+	goStart(l, option);
+	while(!isEnd(*l, option)){
+		name = readPoi(*l, option).name;
+		while(!isEnd(*l, option)){
+			if(strcmp(name, readPoi(*l, option).name)>= 0){
+				ok = 1;
+				//printDestination(readPoi(*l, option), i++, option);
+			}else{
+				ok = 0;
+			}	
+			goNext(l, option);
+	
+		}
+		if(ok == 1){
+			//print
+		}
+
+		goStart(l, option);
+		goNextTimes(l, option, j++);
+	}
+}*/
 
 int comparePrices(const void * a, const void * b) {
 	double aValue = *((double *) a);
@@ -56,7 +97,7 @@ void planTrip(List *l){
         printPlanMenu();
         option = askUserForOption();
 
-		if (destination < 1 || destination > 2) {
+		if (option < 1 || option > 2) {
 			printOptionError();
 		}
     } while (option < 1 || option > 2);
@@ -101,10 +142,13 @@ void readWholeFile(FILE * f, List * l) {
 }
 
 void readNewFile(List * l) {
-	char *input = askUserForPath();
-
+	char * const input = askUserForPath();
+	if(strcmp(input, "data/secondDatabase.nymal") == 0){
+		printf("TODO OK\n");
+	}
+	printf("ANTES FOPEN %s", input);
 	FILE *f = fopen(input, "r");
-
+	printf("DESPUÉS FOPEN %s", input);
 	if (f != NULL) {
 		*l = create();
 		readWholeFile(f, l);
