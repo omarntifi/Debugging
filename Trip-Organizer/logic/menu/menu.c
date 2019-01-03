@@ -46,7 +46,7 @@ char * readUserString() {
 	char tmp;
 	char *ret = (char *) malloc(sizeof(char) * size);
 
-
+	int j;
 	scanf("%c", &tmp);
 	do {
 		i++[ret] = tmp;
@@ -54,12 +54,25 @@ char * readUserString() {
 		if (i >= size) {
 			size *= 2;
 			resize(&ret, size);
+			j = 0;
+ 		     while(ret[j] != '\0'){
+        	  j++;
+   		   	}	
+     	 printf("HAY %d CARACTERES EN RET1", j);
+
 		}
 		scanf("%c", &tmp);
 	} while (tmp != '\n');
-
+	
+	 j = 0;
+	while(ret[j] != 'l'){
+		j++;
+	}
+	printf("HAY %d CARACTERES EN RET", j);
+	printf("ANTES RESIZE %s", ret);
 	resize(&ret, i + 1);
-
+	ret[i] = '\0';
+	printf("DESOUÉS RESIZE %s", ret);
 	return ret;
 }
 
@@ -133,7 +146,7 @@ void printDestinationList(List * l) {
 }
 
 void printAverage(double average) {
-	printf("\n\t\tAverage: %lf\n\n", average);
+	printf("\n\t\tAverage: %.2f\n\n", average);
 }
 
 
@@ -141,6 +154,6 @@ void printTop3(double * prices) {
 	int i = 0;
 
 	for (i = 0; i < 3; i++) {
-		printf("\t\t%d. %lf\n", i+1, prices[i]);
+		printf("\t\t%d. %.2f\n", i+1, prices[i]);
 	}
 }
