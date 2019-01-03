@@ -53,15 +53,13 @@ void insert(List * l, Destination d) {
 			l->poi[i] = l->poi[i]->next[i];
 
 			if (l->poi[i] == l->last) {
-				printf("ENTRA BREAK\n");
 				break;
 			}
 
 			//Les condicions per saltar un element depenen del mode d'ordenació
 			switch (i) {
-				case 0:
+				case BY_NAME:
 					condicio = strcmp(d.name, l->poi[i]->dest.name) > 0;
-					printf("condicio = %d\n", condicio);
 					break;
 				case BY_AVG_PRICE:
 					condicio = getAverageHotelPrice(d) > getAverageHotelPrice(l->poi[i]->dest);
@@ -75,7 +73,6 @@ void insert(List * l, Destination d) {
 				default:
 					//Si per un casual algú decideix afegir més camps, ens protegim ordenant segons entrada
 					condicio = 0;
-					printf("KO");
 					break;
 			}
 		
