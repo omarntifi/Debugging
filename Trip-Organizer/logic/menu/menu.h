@@ -19,5 +19,6 @@ int askUserForOption();
 int isCorrect(int option);
 int isExit(int option);
 char * askUserForPath();
+char * readUserString();
 
 #endif
