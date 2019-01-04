@@ -124,10 +124,9 @@ void mapAltitude(double ** travelAltitude, char ** map, int i, int j, int n) {
 		return;
 	}
 
-	int newI = i, newJ = j, min = NORTH;
-	double minAlt = 0;
-
-	for (int k = 0; k < DIRECTIONS; k++) {
+	int  * newI = i, * newJ = j, min = NORTH;
+	double minAlt = checkAltitudeInDirection(travelAltitude, i, j, 0, n);
+	for (int k = 1; k < DIRECTIONS; k++) {
 		double alt = checkAltitudeInDirection(travelAltitude, i, j, k, n);
 
 		if (alt < minAlt) {
@@ -136,8 +135,10 @@ void mapAltitude(double ** travelAltitude, char ** map, int i, int j, int n) {
 		}
 	}
 
-	advanceInDirection(&newI, &newJ, min);
 
+	advanceInDirection(&newI, &newJ, min);
+	i = newI;
+	j = newJ;
 	mapAltitude(travelAltitude, map, i, j, n);
 }
 
@@ -154,7 +155,7 @@ char ** mapAltitudeTravel(Destination dest) {
 			map[i][j] = '#';
 		}
 	}
-
+	
 	mapAltitude(dest.travelAltitude, map, 0, 0, dest.n);
 
 	return map;

@@ -85,7 +85,7 @@ void planTrip(List *l){
         case 2:
         	map = mapAltitudeTravel(d);
             printAltitudeMap(map, d.n + 2);
-			
+				
             for (i = 0; i < d.n; i++) {
             	free(map[i]);
             }
