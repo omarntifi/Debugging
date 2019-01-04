@@ -108,19 +108,27 @@ void readWholeFile(FILE * f, List * l) {
 }
 
 void readNewFile(List * l) {
-	char * const input = askUserForPath();
+	
+	char const * input = askUserForPath();
+	char *path;
+	path = (char*)malloc(strlen(input)+1);
+	path = &input;
 	if(strcmp(input, "data/secondDatabase.nymal") == 0){
 		printf("TODO OK\n");
 	}
+	
 	printf("ANTES FOPEN %s", input);
-	FILE *f = fopen(input, "r");
-	printf("DESPUÉS FOPEN %s", input);
+	FILE *f = fopen(path, "r");
+	
+
 	if (f != NULL) {
 		*l = create();
 		readWholeFile(f, l);
 	} else {
 		printFileError(input);
 	}
+
+	free(input);
 
 }
 
