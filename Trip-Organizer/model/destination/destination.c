@@ -89,10 +89,10 @@ double travelThroughAltitude(double ** travelAltitude, int i, int j, int n) {
 		return travelAltitude[i][j];
 	}
 
-	int newI = i, newJ = j, min = NORTH;
-	double minAlt = 0;
+	int * newI = i, * newJ = j, min = NORTH;
+	double minAlt = checkAltitudeInDirection(travelAltitude, i, j, 0, n);
 
-	for (int k = 0; k < DIRECTIONS; k++) {
+	for (int k = 1; k < DIRECTIONS; k++) {
 		double alt = checkAltitudeInDirection(travelAltitude, i, j, k, n);
 
 		if (alt < minAlt) {
@@ -102,6 +102,8 @@ double travelThroughAltitude(double ** travelAltitude, int i, int j, int n) {
 	}
 
 	advanceInDirection(&newI, &newJ, min);
+	i = newI;
+	j= newJ;
 
 	return travelAltitude[i][j] + travelThroughAltitude(travelAltitude, i, j, n);
 }
@@ -218,6 +220,7 @@ Destination readFromFile(FILE * file) {
 	fscanf(file, "%d", &d.nHotels);
 
 	d.hotelPrices = (double*) malloc(sizeof(double) * d.nHotels);
+
 	for (i = 0;  i < d.nHotels; i++) {
 		fscanf(file, "%lf", &d.hotelPrices[i]);
 	}
