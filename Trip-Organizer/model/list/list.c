@@ -102,12 +102,12 @@ void removePoi(List * l, int mode) {
 		Node * aux = l -> poi[mode];
 		int i;
 		//Deslliguem el node de la resta
-		for (i = 0; i < MAX_SORTING; i++) {
+		//for (i = 0; i < MAX_SORTING; i++) {
 			l -> poi[i] = aux -> next[i];
 
 			aux -> prev[i] -> next[i] = aux -> next[i];
 			aux -> next[i] -> prev[i] = aux -> prev[i];
-		}
+		//}
 		l -> n--;
 	}
 }
